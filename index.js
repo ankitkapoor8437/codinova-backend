@@ -1,9 +1,14 @@
 const express = require("express");
+const dotenv = require("dotenv").config();
+
+
 const app = express();
-const PORT = 9000;
+const port = 5000 || process.env.PORT;
 
-app.get("/",(req,res)=>{
-    res.json({message: "Hello from Codinova"});
-})
+app.use(express.json());
+app.use("/api/", require("./routes/exchangeList"));
 
-app.listen(3000 || PORT, ()=> console.log(`Server is running on Port ${PORT}`))
+
+app.listen(port, () => {
+    console.log(`Server is running on Port ${port}`)
+});
