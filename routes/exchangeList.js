@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { getExhchangeData, postExchangeData } = require("../controllers/exchangeController")
+const { getExchangeData, postExchangeData } = require("../controllers/exchangeController")
 
-
-router.route("/").get(getExhchangeData).post(postExchangeData);
+// Created the Common Routes for both get and post 
+router.route("/").get(getExchangeData).post(postExchangeData);
 
 module.exports = router;
