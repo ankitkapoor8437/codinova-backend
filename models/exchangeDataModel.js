@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Created the Schema for the Exchange List Data
-const exchangeSchema = new mongoose.Schema({
+const exchangeDataSchema = new mongoose.Schema({
     exchange_id: String,
     website: String,
     name: String,
@@ -21,4 +21,4 @@ const exchangeSchema = new mongoose.Schema({
     }
 );
 
-module.exports = mongoose.model('Exchange', exchangeSchema);
+module.exports = mongoose.model('ExchangeData', exchangeDataSchema);
