@@ -16,9 +16,6 @@ const exchangeDataSchema = new mongoose.Schema({
     volume_1day_usd: Number,
     volume_1mth_usd: Number
 },
-    {
-        timestamps: true,
-    }
 );
 
 module.exports = mongoose.model('ExchangeData', exchangeDataSchema);

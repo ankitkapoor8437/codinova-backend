@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 
-// Created the Schema for the Exchange List Data
+// Created the Schema for the Exchange List Icon
 const exchangeIconSchema = new mongoose.Schema({
     exchange_id:String,
     url: String
 },
-    {
-        timestamps: true,
-    }
 );
 
 module.exports = mongoose.model('ExchangeIcon', exchangeIconSchema);
