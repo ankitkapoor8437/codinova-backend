@@ -1,11 +1,11 @@
-const Exchange = require("../models/exchangeDataModel");
+const ExchangeData = require("../models/exchangeDataModel");
 
 
 // Get Module
 const getExchangeData = async (req, res) => {
     try {
         // Logic to fetch the data from DB.
-        const exchangeListData = await Exchange.find();
+        const exchangeListData = await ExchangeData.find().limit(20);
 
         // Check to see if the data is there in the DB or not.
         if (exchangeListData.length > 0) {
@@ -20,11 +20,24 @@ const getExchangeData = async (req, res) => {
 
 // Post Module
 const postExchangeData = async (req, res) => {
-    const exchangeDataArray = req.body.payload.Data;
-    exchangeDataArray.forEach(element => {
-        const data = new ExchangeData(element);
-        data.save()
-    });
+    try {
+        const exchangeDataArray = req.body.payload.Data;
+        for (const element of exchangeDataArray) {
+            const data = new ExchangeData(element);
+            await data.save();
+        }
+        res.status(200).json({ message: 'Exchange data saved successfully' });
+    } catch (error) {
+        console.error('Error saving exchange data:', error);
+        res.status(500).json({ error: 'An error occurred while saving exchange data' });
+    }
+
+
+    // const exchangeDataArray = req.body.payload.Data;
+    // exchangeDataArray.forEach(element => {
+    //     const data = new ExchangeData(element);
+    //     data.save()
+    // });
     // return null
 };
 
