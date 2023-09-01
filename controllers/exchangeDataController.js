@@ -22,19 +22,23 @@ const getExchangeData = async (req, res) => {
 const postExchangeData = async (req, res) => {
     try {
         const exchangeDataArray = req.body.payload.Data;
+
+        // Check if exchangeDataArray is iterable
+        if (!Array.isArray(exchangeDataArray)) {
+            throw new Error('exchangeDataArray is not an iterable');
+        }
+
         for (const element of exchangeDataArray) {
             const data = new ExchangeData(element);
             await data.save();
-            return null
         }
         res.status(200).json({ message: 'Exchange data saved successfully' });
     } catch (error) {
         console.error('Error saving exchange data:', error);
         res.status(500).json({ error: 'An error occurred while saving exchange data' });
     }
-
-    return null
 };
+
 
 
 module.exports = {

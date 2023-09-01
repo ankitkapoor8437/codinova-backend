@@ -22,10 +22,15 @@ const getExchangeIcon = async (req, res) => {
 const postExchangeIcon = async (req, res) => {
     try {
         const exchangeDataArray = req.body.payload.Data;
+
+        // Check if exchangeDataArray is an array
+        if (!Array.isArray(exchangeDataArray)) {
+            throw new Error('exchangeDataArray is not an array');
+        }
+
         for (const element of exchangeDataArray) {
             const icon = new ExchangeIcon(element);
             await icon.save();
-            return null
         }
         res.status(200).json({ message: 'Exchange icons saved successfully' });
     } catch (error) {
@@ -33,6 +38,7 @@ const postExchangeIcon = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while saving exchange icons' });
     }
 };
+
 
 
 module.exports = {
